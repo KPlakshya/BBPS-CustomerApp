@@ -28,7 +28,7 @@ public class BillerServiceImpl implements  BillerService{
     @Autowired
     KafkaMessagePostingService kafkaMessagePostingService;
 
-    @Value("${customer.posting.request}")
+    @Value("${bbps.posting.request}")
     String customerPostingReqTopic;
 
     @Override
