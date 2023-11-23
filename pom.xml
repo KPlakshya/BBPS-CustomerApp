@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>com.bbps</groupId>
-    <artifactId>bbps-centalunit</artifactId>
+    <artifactId>bbps-CentralUnit</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
