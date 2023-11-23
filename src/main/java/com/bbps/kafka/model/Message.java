@@ -5,22 +5,19 @@ import lombok.ToString;
 import java.util.Map;
 
 @Data
-@ToString
 public class Message {
 
-    private BbpsReqinfo bbpsReqinfo;
+    public BbpsReqinfo bbpsReqinfo;
 
     @Data
-    @ToString
     public static class BbpsReqinfo {
-        private Map<String, Object> headers;
-        private MessageBody messageBody;
+        public Map<String, Object> headers;
+        public MessageBody messageBody;
     }
 
     @Data
-    @ToString
     public static class MessageBody {
-        private Object body;
+        public String body;
     }
 
 }
