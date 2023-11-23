@@ -8,8 +8,8 @@ import org.springframework.kafka.annotation.EnableKafka;
 @EnableKafka
 @EnableJpaRepositories
 @SpringBootApplication
-public class CentralUnitApp {
+public class CustomerApp {
     public static void main(String[] args) {
-        SpringApplication.run(CentralUnitApp.class, args);
+        SpringApplication.run(CustomerApp.class, args);
     }
 }
