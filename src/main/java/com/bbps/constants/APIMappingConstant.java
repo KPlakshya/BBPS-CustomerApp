@@ -8,4 +8,6 @@ public class APIMappingConstant {
     public static final String AGENT_FETCH_REQUEST = "AgentFetchRequest";
 
 
+    public static final String STATUS_CHECK = "status";
+
 }
