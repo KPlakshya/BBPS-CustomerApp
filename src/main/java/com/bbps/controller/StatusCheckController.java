@@ -9,13 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Slf4j
@@ -27,7 +30,7 @@ public class StatusCheckController {
     StatusCheckService statusCheckService;
 
     @PostMapping(value = APIMappingConstant.STATUS_CHECK,produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getStatus(@Valid @RequestBody statusCheckRequest request) {
+    public ResponseEntity<Object> getStatus( @RequestBody statusCheckRequest request) {
         log.info("StatusCheck - Request Received [{}]",request);
        Object response= statusCheckService.fetchStatus(request);
     return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -35,12 +38,11 @@ public class StatusCheckController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException ex) {
-
         List<String> details = new ArrayList<>();
         for (ObjectError error : ex.getBindingResult().getAllErrors()) {
             details.add(error.getDefaultMessage());
         }
         ErrorResponse error = new ErrorResponse("Validation Failed", details);
-        return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(details, HttpStatus.BAD_REQUEST);
     }
 }

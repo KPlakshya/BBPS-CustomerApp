@@ -2,7 +2,7 @@ package com.bbps.controller;
 
 import com.bbps.config.ErrorResponse;
 import com.bbps.constants.APIMappingConstant;
-import com.bbps.model.billerfetch.BillerFetchRequest;
+import com.bbps.model.billeronboard.BillerFetchRequest;
 import com.bbps.model.billfetch.BillFetchRequest;
 import com.bbps.model.billpayment.BillPaymentRequest;
 import com.bbps.model.billvalidation.BillValidationRequest;
@@ -16,7 +16,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,21 +28,21 @@ public class CustomerToBBPSController {
     BillerService billerService;
 
     @PostMapping(value = APIMappingConstant.BILLER_FETCH_REQUEST,produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getBillerFetchRequest(@Valid  @RequestBody BillerFetchRequest billerFetchRequest) {
+    public ResponseEntity<Object> getBillerFetchRequest(  @RequestBody BillerFetchRequest billerFetchRequest) {
         log.info("BILLER - Fetch Request Received [{}]",billerFetchRequest);
        Object response= billerService.processRequest(billerFetchRequest,APIMappingConstant.BILLER_FETCH_REQUEST);
     return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PostMapping(value = APIMappingConstant.BILL_FETCH_REQUEST,produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getBillFetchRequest(@Valid @RequestBody BillFetchRequest billFetchRequest) {
+    public ResponseEntity<Object> getBillFetchRequest( @RequestBody BillFetchRequest billFetchRequest) {
         log.info("BILL - Fetch Request Received [{}]",billFetchRequest);
         Object response= billerService.processRequest(billFetchRequest,APIMappingConstant.BILL_FETCH_REQUEST);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PostMapping(value = APIMappingConstant.BILL_VALIDATION_REQUEST,produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getBillValidationRequest(@Valid @RequestBody BillValidationRequest billValidationRequest) {
+    public ResponseEntity<Object> getBillValidationRequest( @RequestBody BillValidationRequest billValidationRequest) {
         log.info("BILL - Fetch Request Received [{}]",billValidationRequest);
         Object response= billerService.processRequest(billValidationRequest,APIMappingConstant.BILL_VALIDATION_REQUEST);
         return ResponseEntity.status(HttpStatus.OK).body(response);
